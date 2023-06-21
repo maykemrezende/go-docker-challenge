@@ -11,7 +11,7 @@ name: Publish Docker image
 
 on:
   push:
-    branches: ['main']
+    branches: ['master']
 
 jobs:
   push_to_registry:
@@ -39,6 +39,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: |
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
